@@ -1,5 +1,12 @@
 const mysql = require('mysql2');
-var conn = require('../database');
+
+// Create a MySQL connection
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'nodeapps'
+});
 
 exports.getRegisterPage = (req, res) => {
   res.render('register', { message: null });
