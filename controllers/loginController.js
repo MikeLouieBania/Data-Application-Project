@@ -1,26 +1,30 @@
 const mysql = require('mysql2');
-var conn = require('../database');
 
-exports.getLogin = (req, res) => {
-    res.render('login');
-};
+// Create a MySQL connection
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'nodeapps'
+});
 
 exports.postLogin = (req, res) => {
-    let valid = false;
-    const { email, password } = req.body;
+  const { email, password } = req.body;
 
-    const query = `SELECT * FROM users WHERE email = '${email}' AND password = '${password}'`;
+  // Execute a query to retrieve the user from the database
+  connection.query('SELECT * FROM users WHERE email = ? AND password = ?', [email, password], (err, results) => {
+    if (err) {
+      console.error('Error executing query: ' + err.stack);
+      return res.status(500).send('Error executing query');
+    }
 
-    conn.query(query,(error,result) =>{
-      if (error){
-        console.error(error)
-        res.redirect('/login');
-      }
-      if(result.length>0){
-        res.redirect('/home');
-      }
-      else{
-        res.redirect('/login');
-      }
-    })
+    if (results.length > 0) {
+      res.render('home');
+    } else {
+      res.render('login', { errorMessage: 'Invalid username or password' });
+    }
+  });
+};
+exports.getLogin = (req, res) => {
+    res.render('login');
 };
