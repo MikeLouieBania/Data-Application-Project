@@ -69,9 +69,19 @@
   .login-form .input-field input:focus {
     border-color: #222;
   }
-  .login-form a.link {
+  .login-form p {
+    font-size: small;
     text-decoration: none;
-    color: #747474;
+    color: #1d1d1d;
+    letter-spacing: 0.2px;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-top: 20px;
+  }
+  .login-form a.link {
+    font-size: small;
+    text-decoration: none;
+    color: #8a0000;
     letter-spacing: 0.2px;
     text-transform: uppercase;
     display: inline-block;
@@ -103,13 +113,13 @@
   .login-form .action button:hover {
     background: #d8d8d8;
   }
-  .login-form .action button {
-    background: #881515;
+  .login-form .action button:nth-child(1) {
+    background: #972424;
     color: #fff;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 4px;
   }
-  .login-form .action button:hover {
+  .login-form .action button:nth-child(1):hover {
     background: #a02020;
   }
   </style>
@@ -117,7 +127,7 @@
 <body>
 
 <div class="login-form">
-  <form action="/register" method="post">
+  <form action="/register" method="post" name="register">
     <h1>Register</h1>
     <div class="content">
       <div class="input-field">
@@ -129,10 +139,11 @@
       <div class="input-field">
         <label for="usertype">Choose User Type:</label>
           <select name="usertype">
-            <option value="admin">Admin</option>
-            <option value="client">Client</option>
+            <option value="Admin">Admin</option>
+            <option value="Client">Client</option>
           </select>
       </div>
+      <p>Already have an Account? <a href="/login" class="link">Login Here</a></p>
     </div>
     <div class="action">
       <button>Register</button>
