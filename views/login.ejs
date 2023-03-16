@@ -39,6 +39,9 @@
   .login-form .input-field {
     padding: 12px 5px;
   }
+  .error {
+    text-align: center;
+  }
   .login-form .input-field input {
     font-size: 16px;
     display: block;
@@ -68,6 +71,15 @@
   }
   .login-form .input-field input:focus {
     border-color: #222;
+  }
+  .login-form p {
+    font-size: small;
+    text-decoration: none;
+    color: #1d1d1d;
+    letter-spacing: 0.2px;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-top: 20px;
   }
   .login-form a.link {
     text-decoration: none;
@@ -119,6 +131,11 @@
 <div class="login-form">
   <form action="/login" method="post">
     <h1>Login</h1>
+    <div class="error">
+      <% if (typeof errorMessage !== 'undefined') { %>
+        <p style="color: red;"><%= errorMessage %></p>
+        <% } %>
+    </div>
     <div class="content">
       <div class="input-field">
         <input type="email" placeholder="Email" id="email" name="email">

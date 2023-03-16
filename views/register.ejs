@@ -39,6 +39,9 @@
   .login-form .input-field {
     padding: 12px 5px;
   }
+  .error {
+    text-align: center;
+  }
   .login-form .input-field input {
     font-size: 16px;
     display: block;
@@ -129,6 +132,11 @@
 <div class="login-form">
   <form action="/register" method="post" name="register">
     <h1>Register</h1>
+    <div class="error">
+      <% if (message) { %>
+        <p style="color: red;"><%= message %></p>
+      <% } %>
+    </div>
     <div class="content">
       <div class="input-field">
         <input type="email" placeholder="Email" id="email" name="email">
