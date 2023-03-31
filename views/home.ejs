@@ -76,6 +76,9 @@
       padding: 7px 0;
       background: transparent;
       }
+      .error {
+        text-align: center;
+      }
       .item:hover p, .question:hover p, .question label:hover, input:hover::placeholder {
       color: #095484;
       }
@@ -198,7 +201,7 @@
   </head>
   <body>
     <div class="testbox">
-      <form action="/">
+      <form action="/home" method="post" name="home">
         <div class="banner">
           <h1>User Validation Form</h1>
         </div>
@@ -206,66 +209,69 @@
         <div class="item">
           <p>Name<span class="required"></span></p>
           <div class="name-item">
-            <input type="text" name="firstname" placeholder="Firstname" required/>
-            <input type="text" name="middlename" placeholder="Middlename"/>
-            <input type="text" name="lastname" placeholder="Lastname" required/>
+            <input type="text" id="firstname" name="firstname" placeholder="Firstname" onkeydown="return /[a-zA-Z]/i.test(event.key)" required/>
+            <input type="text" id="middlename" name="middlename" placeholder="Middlename" onkeydown="return /[a-zA-Z]/i.test(event.key)" required/>
+          </div>
+          <div class="name-item">
+            <input type="text" id="lastname" name="lastname" placeholder="Lastname" onkeydown="return /[a-zA-Z]/i.test(event.key)" required/>
           </div>
         </div>
 
         <div class="question">
           <p>Gender<span class="required"></span></p>
           <div class="question-answer">
-            <label><input type="radio" name="Male"/> <span>Male</span></label>
-            <label><input type="radio" name="Female"/> <span>Female</span></label>
-            <label><input type="radio" name="Not Specified"/> <span>Prefer not to say</span></label>
+            <label><input type="radio" id="male" value="male" name="gender"/> <span>Male</span></label>
+            <label><input type="radio" id="female" value="female" name="gender"/> <span>Female</span></label>
+            <label><input type="radio" id="preferNotToSay" value="prefer not to say" name="gender"/> <span>Prefer not to say</span></label>
           </div>
         </div>
 
         <div class="item">
           <p>Birthdate<span class="required"></span></p>
-          <input type="date" name="name" required/>
+          <input type="date" name="birthdate" required/>
         </div>
 
         <div class="question">
           <p>Hobby</p>
           <div class="question-answer">
             <div>
-              <input type="checkbox" value="none" id="checkbox_1" name="Sports"/>
-              <label for="checkbox_1" class="checkbox"><span>Sports</span></label>
-              <input type="checkbox" value="none" id="checkbox_2" name="Reading"/>
-              <label for="checkbox_2" class="checkbox"><span>Reading</span></label>
-              <input type="checkbox" value="none" id="checkbox_3" name="Cooking"/>
-              <label for="checkbox_3" class="checkbox"><span>Cooking</span></label>
-              <input type="checkbox" value="none" id="checkbox_4" name="Gardening"/>
-              <label for="checkbox_4" class="checkbox"><span>Gardening</span></label>
-              <input type="checkbox" value="none" id="checkbox_5" name="Other"/>
-              <label for="checkbox_5" class="checkbox"><span>Other</span></label>
+              <input type="checkbox" value="sports" id="sports" name="hobby[]"/>
+              <label for="sports" class="checkbox"><span>Sports</span></label>
+              <input type="checkbox" value="reading" id="reading" name="hobby[]"/>
+              <label for="reading" class="checkbox"><span>Reading</span></label>
+              <input type="checkbox" value="cooking" id="cooking" name="hobby[]"/>
+              <label for="cooking" class="checkbox"><span>Cooking</span></label>
+              <input type="checkbox" value="gardening" id="gardening" name="hobby[]"/>
+              <label for="gardening" class="checkbox"><span>Gardening</span></label>
+              <input type="checkbox" value="other" id="other" name="hobby[]"/>
+              <label for="other" class="checkbox"><span>Other</span></label>
             </div>
           </div>
         </div>
 
         <div class="item">
           <p>Civil Status<span class="required"></span></p>
-            <select>
+            <select name="status">
               <option value=""></option>
-              <option value="1">Single</option>
-              <option value="2">Married</option>
-              <option value="3">Divorced</option>
-              <option value="4">Widowed</option>
+              <option value="single">Single</option>
+              <option value="married">Married</option>
+              <option value="divorced">Divorced</option>
+              <option value="widowed">Widowed</option>
             </select>
           </div>
 
           <div class="item">
             <p>Home Address<span class="required"></span></p>
-            <input type="text" name="street" placeholder="Street address" required/>
-            <input type="text" name="zipCode" placeholder="Postal / Zip code" maxlength="4" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required/>
+            <input type="text" name="address" placeholder="Street address" required/>
+            <input type="text" maxlength="4" name="zip" placeholder="Postal / Zip code" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required/>
             <div class="city-item">
               <input id="cityInput" type="text" name="city" placeholder="City" required>
               <input id="regionInput" type="text" name="region" placeholder="Region" required/>
             </div>
           </div>
+
         <div class="btn-block">
-          <button type="submit" href="/">Apply</button>
+          <button>Apply</button>
         </div>
       </form>
     </div>
