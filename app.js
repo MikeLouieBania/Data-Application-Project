@@ -3,12 +3,16 @@ const app = express();
 const port = 3000;
 const mysql = require('mysql2');
 const registerRoutes = require('./routes/register');
+const homeRoutes = require('./routes/home');
+const loginRoutes = require('./routes/login');
 
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 app.use('/register', registerRoutes);
+app.use('/', homeRoutes);
+app.use('/', loginRoutes);
 
-const loginRoutes = require('./routes/login')
+
 
 // Create a MySQL connection
 const connection = mysql.createConnection({
@@ -28,8 +32,6 @@ connection.connect((err) => {
 });
 
 app.use(express.static('public'));
-
-app.use('/', loginRoutes);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
